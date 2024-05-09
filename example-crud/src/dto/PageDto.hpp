@@ -3,6 +3,7 @@
 #define CRUD_PAGEDTO_HPP
 
 #include "UserDto.hpp"
+#include "EOP_feedback_FeedbackDto.hpp"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
@@ -21,6 +22,12 @@ class PageDto : public oatpp::DTO {
 class UsersPageDto : public PageDto<oatpp::Object<UserDto>> {
 
   DTO_INIT(UsersPageDto, PageDto<oatpp::Object<UserDto>>)
+
+};
+
+class FeedbackPageDto : public PageDto<oatpp::Object<FeedbackDto>> {
+
+	DTO_INIT(FeedbackPageDto, PageDto<oatpp::Object<FeedbackDto>>)
 
 };
 

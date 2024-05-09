@@ -1,6 +1,6 @@
 
-#ifndef CRUD_USERDB_HPP
-#define CRUD_USERDB_HPP
+#ifndef CRUD_FeedbackNotificatonDb_HPP
+#define CRUD_FeedbackNotificatonDb_HPP
 
 #include "dto/EOP_feedback_FeedbackNotificationDto.hpp"
 #include "oatpp-sqlite/orm.hpp"

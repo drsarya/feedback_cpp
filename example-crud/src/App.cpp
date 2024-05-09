@@ -20,6 +20,7 @@ void run() {
   oatpp::web::server::api::Endpoints docEndpoints;
 
   docEndpoints.append(router->addController(UserController::createShared())->getEndpoints());
+  docEndpoints.append(router->addController(UserController::createShared())->getEndpoints());
 
   router->addController(oatpp::swagger::Controller::createShared(docEndpoints));
   router->addController(StaticController::createShared());

@@ -1,5 +1,5 @@
-#ifndef UserDto_hpp
-#define UserDto_hpp
+#ifndef FeedbackDto_hpp
+#define FeedbackDto_hpp
 
 #include "oatpp/core/macro/codegen.hpp"
 #include "oatpp/core/Types.hpp"

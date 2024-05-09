@@ -1,9 +1,7 @@
-#include "EOP_feedback_FeedbackNotification.hpp"
+#include "EOP_feedback_FeedbackNotificationService.hpp"
 
  
  
-
-
 oatpp::Object<FeedbackNotificationDto> FeedbackNotificationService::createNotificationFeedback(const oatpp::Object<FeedbackNotificationDto>& dto) {
 
 	auto dbResult = m_database->createNotificationFeedback(dto);
@@ -24,7 +22,6 @@ oatpp::Object<FeedbackNotificationDto> FeedbackNotificationService::readNotifica
 }
 
 oatpp::Vector<oatpp::Object<FeedbackNotificationDto>>> FeedbackNotificationService::getNotificationsForUserId(const oatpp::String& userId ) {
-
 
 	auto dbResult = m_database->getNotificationsForUserId(userId);
 	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());

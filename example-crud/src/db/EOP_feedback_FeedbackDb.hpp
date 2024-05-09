@@ -1,6 +1,6 @@
 
-#ifndef CRUD_USERDB_HPP
-#define CRUD_USERDB_HPP
+#ifndef CRUD_FeedbackDb_HPP
+#define CRUD_FeedbackDb_HPP
 
 #include "dto/EOP_feedback_FeedbackDto.hpp"
 #include "oatpp-sqlite/orm.hpp"
@@ -47,7 +47,9 @@ public:
 
 
 		QUERY(getFeedbacks,
-			"SELECT * FROM feedback.feedback order by creation_date desc LIMIT :limit OFFSET :offset;" )
+			"SELECT * FROM feedback.feedback order by creation_date desc LIMIT :limit OFFSET :offset;", 
+			PARAM(oatpp::UInt32, offset),
+			PARAM(oatpp::UInt32, limit))
 
 		QUERY(getFeedbackById,
 			"SELECT * FROM feedback.feedback WHERE id=:feedbackId ;",

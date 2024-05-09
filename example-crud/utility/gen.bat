@@ -14,7 +14,7 @@ cd tmp
 
 call :install_module %BUILD_TYPE% oatpp
 call :install_module %BUILD_TYPE% oatpp-swagger
-call :install_module %BUILD_TYPE% oatpp-postgresql
+call :install_module %BUILD_TYPE% oatpp-sqlite
 
 
 cd oatpp
@@ -28,6 +28,7 @@ cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DOATPP_BUILD_TESTS=OFF -DOATPP_SQLITE_AMALGAMATION=ON ..
 cmake --build .   --target install
 
+:: cd oatpp-postgresql
 cd oatpp-sqlite
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DOATPP_BUILD_TESTS=OFF -DOATPP_SQLITE_AMALGAMATION=ON ..

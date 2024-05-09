@@ -1,6 +1,6 @@
 
-#ifndef UserController_hpp
-#define UserController_hpp
+#ifndef FeedbackNotificationController_hpp
+#define FeedbackNotificationController_hpp
 
 #include "service/EOP_feedback_FeedbackNotificationService.hpp"
 

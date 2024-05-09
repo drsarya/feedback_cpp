@@ -75,7 +75,7 @@ make install -j $NPROC
 
 install_module2 $BUILD_TYPE oatpp RELEASE
 install_module $BUILD_TYPE oatpp-swagger RELEASE
-install_module $BUILD_TYPE oatpp-postgresql RELEASE
+install_module $BUILD_TYPE oatpp-sqlite RELEASE
 
 cd ../
 rm -rf tmp
