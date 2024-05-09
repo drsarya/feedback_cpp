@@ -15,10 +15,10 @@ private:
 private:
 	OATPP_COMPONENT(std::shared_ptr<FeedbackNotificatonDb>, m_database); // Inject database component
 public:
-
 	oatpp::Object<FeedbackNotificationDto> createNotificationFeedback(const oatpp::Object<FeedbackNotificationDto>& dto);
-	oatpp::Object<FeedbackNotificationDto> readNotificationFeedback(const oatpp::UInt32& id);
-	oatpp::Vector<oatpp::Object<FeedbackNotificationDto>>> getNotificationsForUserId(const oatpp::String& userId);
+	oatpp::Object<FeedbackNotificationDto> getNotificationById(const oatpp::Int32& id);
+	oatpp::Object<FeedbackNotificationDto> readNotificationFeedback(const oatpp::Int32& id);
+	oatpp::Vector<oatpp::Object<FeedbackNotificationDto>> getNotificationsForUserId(const oatpp::String& userId);
 	oatpp::Object<StatusDto> deleteReadNotifications();
 };
 

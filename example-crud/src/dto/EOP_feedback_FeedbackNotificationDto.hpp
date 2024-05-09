@@ -7,10 +7,6 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 
-ENUM(FeedbackReadStatus, v_int32,
-    VALUE(NOT_READ, 1, "NOT_READ"),
-    VALUE(READ, 2, "READ")
-)
 
 
 class FeedbackNotificationDto : public oatpp::DTO {
@@ -18,11 +14,11 @@ class FeedbackNotificationDto : public oatpp::DTO {
     DTO_INIT(FeedbackNotificationDto, DTO)
 
     DTO_FIELD(Int32, id);
-    DTO_FIELD(Int32, feedbackId, "feedbackId");
-    DTO_FIELD(String, userId, "userId");
-    DTO_FIELD(String, description, "description");
-    DTO_FIELD(Enum<FeedbackReadStatus>::AsString, notificationStatus, "notificationStatus");
-    DTO_FIELD(String, creationDate, "creationDate");
+    DTO_FIELD(Int32, feedbackId);
+    DTO_FIELD(String, userId);
+    DTO_FIELD(String, description);
+    DTO_FIELD(Int32, notificationStatus);
+    DTO_FIELD(String, creationDate);
 };
 
 

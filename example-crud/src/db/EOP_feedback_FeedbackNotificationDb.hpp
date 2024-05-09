@@ -17,32 +17,39 @@ public:
 		: oatpp::orm::DbClient(executor)
 	{
 
+		oatpp::orm::SchemaMigration migration(executor);
+		migration.addFile(2 /* start from version 1 */, DATABASE_MIGRATIONS "/002_init.sql");
+		// TODO - Add more migrations here.
+		migration.migrate(); // <-- run migrations. This guy will throw on error.
+
+		auto version = executor->getSchemaVersion();
+		OATPP_LOGD("FeedbackNotificatonDb", "Migration - OK. Version=%lld.", version);
 	}
-	QUERY(createNotificationFeedback,
-		"insert into feedback.feedback_notification(feedback_id, user_id, description) values " 
-		"(:notification.feedbackId, :notification.userId, :notification.description );",
-		PARAM(oatpp::Object<FeedbackNotificationDto>, notification))
+		
+		QUERY(createNotificationFeedback,
+			"insert into  FeedbackNotification (feedbackId, userId, description) values " 
+			"(:notification.feedbackId, :notification.userId, :notification.description );",
+			PARAM(oatpp::Object<FeedbackNotificationDto>, notification))
 
-		QUERY(readNotificationFeedback,
-			"UPDATE feedback.feedback_notification "
-			"SET read_status = 2 "
-			"WHERE id = :notification.id;",
-			PARAM(oatpp::Int32, id))
-
-		QUERY(getNotificationsForUserId,
-			"SELECT * FROM feedback.feedback_notification "
-			"WHERE  user_id=:userId and read_status = 1 order by creation_date desc;",
-			PARAM(oatpp::String, userId)
 
 		QUERY(getNotificationById,
-			"SELECT * FROM feedback.feedback_notification "
+			"SELECT  *  FROM  FeedbackNotification "
 			"WHERE  id=:id;",
 			PARAM(oatpp::Int32, id))
-
+	 
+		QUERY(readNotificationFeedback,
+			"UPDATE  FeedbackNotification "
+			"SET notificationStatus = 2 "
+			"WHERE id = :id;",
+			PARAM(oatpp::Int32, id))
+		 
+		QUERY(getNotificationsForUserId,
+			"SELECT * FROM FeedbackNotification "
+			"WHERE  userId=:userId and notificationStatus = 1 order by creationDate desc;",
+			PARAM(oatpp::String, userId))
 
 		QUERY(deleteReadNotifications,
-			"delete FROM feedback.feedback_notification WHERE read_status = 2;")
-
+			"delete FROM feedbackNotification WHERE notificationStatus = 2;")
 };
 
 #include OATPP_CODEGEN_END(DbClient) //<- End Codegen

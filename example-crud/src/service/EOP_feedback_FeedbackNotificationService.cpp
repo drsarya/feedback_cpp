@@ -9,19 +9,34 @@ oatpp::Object<FeedbackNotificationDto> FeedbackNotificationService::createNotifi
 
 	auto notificationId = oatpp::sqlite::Utils::getLastInsertRowId(dbResult->getConnection());
 
-	return getNotificationById((v_int32)notificationId);
+	return FeedbackNotificationService::getNotificationById((v_int32)notificationId);
+}
+
+
+oatpp::Object<FeedbackNotificationDto> FeedbackNotificationService::getNotificationById(const oatpp::Int32& id) {
+
+	auto dbResult = m_database->getNotificationById(id );
+	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
+	OATPP_ASSERT_HTTP(dbResult->hasMoreToFetch(), Status::CODE_404, "Notification not found");
+
+	auto result = dbResult->fetch<oatpp::Vector<oatpp::Object<FeedbackNotificationDto>>>();
+	OATPP_ASSERT_HTTP(result->size() == 1, Status::CODE_500, "Unknown error");
+
+	return result[0];
 
 }
 
-oatpp::Object<FeedbackNotificationDto> FeedbackNotificationService::readNotificationFeedback(const oatpp::UInt32& id) {
+ 
+oatpp::Object<FeedbackNotificationDto> FeedbackNotificationService::readNotificationFeedback(const oatpp::Int32& id) {
 
 	auto dbResult = m_database->readNotificationFeedback(id);
 	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
-	return getNotificationById(dto->id);
+	return FeedbackNotificationService::getNotificationById(id);
 
 }
+ 
 
-oatpp::Vector<oatpp::Object<FeedbackNotificationDto>>> FeedbackNotificationService::getNotificationsForUserId(const oatpp::String& userId ) {
+oatpp::Vector<oatpp::Object<FeedbackNotificationDto>> FeedbackNotificationService::getNotificationsForUserId(const oatpp::String& userId ) {
 
 	auto dbResult = m_database->getNotificationsForUserId(userId);
 	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
@@ -41,3 +56,5 @@ oatpp::Object<StatusDto> FeedbackNotificationService::deleteReadNotifications() 
 	status->message = "Read notifications was successfully deleted";
 	return status;
 }
+
+ 

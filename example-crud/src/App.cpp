@@ -2,6 +2,8 @@
 #include "AppComponent.hpp"
 
 #include "controller/UserController.hpp"
+#include "controller/EOP_feedback_FeedbackController.hpp"
+#include "controller/EOP_feedback_FeedbackNotificationController.hpp"
 #include "controller/StaticController.hpp"
 
 #include "oatpp-swagger/Controller.hpp"
@@ -20,7 +22,8 @@ void run() {
   oatpp::web::server::api::Endpoints docEndpoints;
 
   docEndpoints.append(router->addController(UserController::createShared())->getEndpoints());
-  docEndpoints.append(router->addController(UserController::createShared())->getEndpoints());
+  // docEndpoints.append(router->addController(FeedbackController::createShared())->getEndpoints());
+  docEndpoints.append(router->addController(FeedbackNotificationController::createShared())->getEndpoints());
 
   router->addController(oatpp::swagger::Controller::createShared(docEndpoints));
   router->addController(StaticController::createShared());

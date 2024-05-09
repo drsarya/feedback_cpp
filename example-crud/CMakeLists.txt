@@ -4,12 +4,22 @@ project(crud)
 set(CMAKE_CXX_STANDARD 11)
 
 add_library(crud-lib
+        src/controller/EOP_feedback_FeedbackController.hpp
+        src/controller/EOP_feedback_FeedbackNotificationController.hpp
         src/controller/StaticController.hpp
         src/controller/UserController.hpp
+        src/db/EOP_feedback_FeedbackDb.hpp
+        src/db/EOP_feedback_FeedbackNotificationDb.hpp
         src/db/UserDb.hpp
+        src/dto/EOP_feedback_FeedbackDto.hpp
+        src/dto/EOP_feedback_FeedbackNotificationDto.hpp
         src/dto/PageDto.hpp
         src/dto/StatusDto.hpp
         src/dto/UserDto.hpp
+        src/service/EOP_feedback_FeedbackNotificationService.cpp 
+        src/service/EOP_feedback_FeedbackNotificationService.hpp
+        src/service/EOP_feedback_FeedbackService.cpp
+        src/service/EOP_feedback_FeedbackService.hpp
         src/service/UserService.cpp
         src/service/UserService.hpp
         src/AppComponent.hpp

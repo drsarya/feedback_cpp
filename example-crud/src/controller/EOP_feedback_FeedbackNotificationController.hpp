@@ -7,11 +7,12 @@
 #include "oatpp/web/server/api/ApiController.hpp"
 #include "oatpp/parser/json/mapping/ObjectMapper.hpp"
 #include "oatpp/core/macro/codegen.hpp"
+#include "service/UserService.hpp"
 
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
 /**
- * User REST controller.
+ * FeedbackNotification REST controller.
  */
 class FeedbackNotificationController : public oatpp::web::server::api::ApiController {
 public:
@@ -19,7 +20,8 @@ public:
         : oatpp::web::server::api::ApiController(objectMapper)
     {}
 private:
-    FeedbackNotificationService m_feedbackNotificationService; // Create user service.
+    UserService m_userService; // Create user service.
+    FeedbackNotificationService m_feedbackNotificationService; // Create feedback notification service.
 public:
 
     static std::shared_ptr<FeedbackNotificationController> createShared(
@@ -28,6 +30,7 @@ public:
         return std::make_shared<FeedbackNotificationController>(objectMapper);
     }
 
+     
     ENDPOINT_INFO(createNotificationFeedback) {
         info->summary = "Create notification feedback";
 
@@ -42,16 +45,16 @@ public:
     {
         return createDtoResponse(Status::CODE_200, m_feedbackNotificationService.createNotificationFeedback(dto));
     }
-
+ 
 
     ENDPOINT_INFO(readNotificationFeedback) {
         info->summary = "Read notification feedback";
 
-        info->addResponse<Object<UserDto>>(Status::CODE_200, "application/json");
+        info->addResponse<Object<FeedbackNotificationDto>>(Status::CODE_200, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_404, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
 
-        info->pathParams["id"].description = "User Identifier";
+        info->pathParams["id"].description = "Notification Identifier";
     }
     ENDPOINT("PUT", "notification-feedback/{id}", readNotificationFeedback,
         PATH(Int32, id))
@@ -60,10 +63,10 @@ public:
     }
 
 
-    ENDPOINT_INFO(getNotificationsForUserId) {
+     ENDPOINT_INFO(getNotificationsForUserId) {
         info->summary = "Get notifications by userId";
 
-        info->addResponse<Vector<Object<UserDto>>>(Status::CODE_200, "application/json");
+        info->addResponse<oatpp::Vector<Object<FeedbackNotificationDto>>>(Status::CODE_200, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_404, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
 
@@ -87,7 +90,6 @@ public:
     {
         return createDtoResponse(Status::CODE_200, m_feedbackNotificationService.deleteReadNotifications());
     }
-
 };
 
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
