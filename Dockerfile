@@ -8,11 +8,14 @@ RUN apk add git
 RUN apk add make
 RUN apk add cmake
 
-ADD . /service
+COPY . /service
 
 WORKDIR /service/utility
 
-RUN ./install-oatpp-modules.sh Release
+
+RUN ls /service/utility/tmp
+RUN cat /service/utility/modules.sh
+RUN /service/utility/modules.sh
 
 WORKDIR /service/build
 
