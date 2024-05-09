@@ -1,0 +1,46 @@
+#include "EOP_feedback_FeedbackNotification.hpp"
+
+ 
+ 
+
+
+oatpp::Object<FeedbackNotificationDto> FeedbackNotificationService::createNotificationFeedback(const oatpp::Object<FeedbackNotificationDto>& dto) {
+
+	auto dbResult = m_database->createNotificationFeedback(dto);
+	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
+
+	auto notificationId = oatpp::sqlite::Utils::getLastInsertRowId(dbResult->getConnection());
+
+	return getNotificationById((v_int32)notificationId);
+
+}
+
+oatpp::Object<FeedbackNotificationDto> FeedbackNotificationService::readNotificationFeedback(const oatpp::UInt32& id) {
+
+	auto dbResult = m_database->readNotificationFeedback(id);
+	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
+	return getNotificationById(dto->id);
+
+}
+
+oatpp::Vector<oatpp::Object<FeedbackNotificationDto>>> FeedbackNotificationService::getNotificationsForUserId(const oatpp::String& userId ) {
+
+
+	auto dbResult = m_database->getNotificationsForUserId(userId);
+	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
+
+	auto items = dbResult->fetch<oatpp::Vector<oatpp::Object<FeedbackNotificationDto>>>();
+	return items;
+
+}
+
+
+oatpp::Object<StatusDto> FeedbackNotificationService::deleteReadNotifications() {
+	auto dbResult = m_database->deleteReadNotifications();
+	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
+	auto status = StatusDto::createShared();
+	status->status = "OK";
+	status->code = 200;
+	status->message = "Read notifications was successfully deleted";
+	return status;
+}
