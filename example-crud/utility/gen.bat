@@ -14,7 +14,7 @@ cd tmp
 
 call :install_module %BUILD_TYPE% oatpp
 call :install_module %BUILD_TYPE% oatpp-swagger
-call :install_module %BUILD_TYPE% oatpp-sqlite
+call :install_module %BUILD_TYPE% oatpp-postgresql
 
 
 cd oatpp
