@@ -7,7 +7,6 @@
 #include "oatpp/web/server/api/ApiController.hpp"
 #include "oatpp/parser/json/mapping/ObjectMapper.hpp"
 #include "oatpp/core/macro/codegen.hpp"
-#include "service/UserService.hpp"
 
 #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 

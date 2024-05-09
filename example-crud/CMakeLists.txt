@@ -7,21 +7,20 @@ add_library(crud-lib
         src/controller/EOP_feedback_FeedbackController.hpp
         src/controller/EOP_feedback_FeedbackNotificationController.hpp
         src/controller/StaticController.hpp
-        src/controller/UserController.hpp
+        
         src/db/EOP_feedback_FeedbackDb.hpp
         src/db/EOP_feedback_FeedbackNotificationDb.hpp
-        src/db/UserDb.hpp
+        
         src/dto/EOP_feedback_FeedbackDto.hpp
         src/dto/EOP_feedback_FeedbackNotificationDto.hpp
         src/dto/PageDto.hpp
         src/dto/StatusDto.hpp
-        src/dto/UserDto.hpp
+        
         src/service/EOP_feedback_FeedbackNotificationService.cpp 
         src/service/EOP_feedback_FeedbackNotificationService.hpp
         src/service/EOP_feedback_FeedbackService.cpp
         src/service/EOP_feedback_FeedbackService.hpp
-        src/service/UserService.cpp
-        src/service/UserService.hpp
+        
         src/AppComponent.hpp
         src/DatabaseComponent.hpp
         src/SwaggerComponent.hpp
@@ -80,14 +79,6 @@ endif()
 add_executable(crud-exe src/App.cpp)
 target_link_libraries(crud-exe crud-lib)
 
-add_executable(crud-test
-        test/tests.cpp
-        test/app/TestClient.hpp
-        test/app/TestDatabaseComponent.hpp
-        test/app/TestComponent.hpp
-        test/UserControllerTest.hpp
-        test/UserControllerTest.cpp)
-target_link_libraries(crud-test crud-lib)
+ 
 
-enable_testing()
-add_test(project-tests crud-test)
+ 
