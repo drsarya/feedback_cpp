@@ -25,11 +25,11 @@ class UsersPageDto : public PageDto<oatpp::Object<UserDto>> {
 
 };
 
-// class FeedbackPageDto : public PageDto<oatpp::Object<FeedbackDto>> {
+ class FeedbackPageDto : public PageDto<oatpp::Object<FeedbackDto>> {
 
-// 	DTO_INIT(FeedbackPageDto, PageDto<oatpp::Object<FeedbackDto>>)
+ 	DTO_INIT(FeedbackPageDto, PageDto<oatpp::Object<FeedbackDto>>)
 
-// };
+ };
 
 #include OATPP_CODEGEN_END(DTO)
 

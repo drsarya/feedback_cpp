@@ -20,8 +20,7 @@ public:
         : oatpp::web::server::api::ApiController(objectMapper)
     {}
 private:
-    UserService m_userService; // Create user service.
-    FeedbackNotificationService m_feedbackNotificationService; // Create feedback notification service.
+    FeedbackNotificationService m_feedbackNotificationService;  
 public:
 
     static std::shared_ptr<FeedbackNotificationController> createShared(
