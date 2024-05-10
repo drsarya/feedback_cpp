@@ -17,6 +17,7 @@
      DTO_FIELD(Boolean, showCommentatorLogin);
      DTO_FIELD(String, courseId);
      DTO_FIELD(String, ownerCourseUserId);
+     DTO_FIELD(Boolean, isReadByOwnerCourse);
      DTO_FIELD(String, ownerCourseAnswerComment);
      DTO_FIELD(String, ownerCourseAnswerCommentCreationDate);
      DTO_FIELD(String, description);

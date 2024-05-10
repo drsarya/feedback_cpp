@@ -56,7 +56,7 @@
  			PARAM(oatpp::UInt32, limit))
 
  		QUERY(getFeedbackByCourseId,
- 			"SELECT * FROM Feedback where courseId=:courseId and isBanned=false order by creationDate desc LIMIT :limit OFFSET :offset;",
+ 			"SELECT * FROM Feedback where courseId=:courseId and isBanned=false and isReadByOwnerCourse=true order by creationDate desc LIMIT :limit OFFSET :offset;",
  			PARAM(oatpp::String, courseId),
  			PARAM(oatpp::UInt32, offset),
  			PARAM(oatpp::UInt32, limit))
@@ -70,7 +70,8 @@
  		QUERY(updateAnswerByCourseOwner,
  			"UPDATE Feedback "
  			"SET ownerCourseAnswerComment =:feedback.ownerCourseAnswerComment, "
- 			"ownerCourseAnswerCommentCreationDate = CURRENT_TIMESTAMP "
+ 			"ownerCourseAnswerCommentCreationDate = CURRENT_TIMESTAMP, "
+ 			"isReadByOwnerCourse=:feedback.isReadByOwnerCourse "
  			"WHERE id=:feedback.id;",
  			PARAM(oatpp::Object<FeedbackDto>, feedback))
 

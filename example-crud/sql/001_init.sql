@@ -7,6 +7,7 @@ create table Feedback
     showCommentatorLogin                 boolean       not null,
     courseId                             varchar(30)   not null,
     ownerCourseUserId                    varchar(30)   not null,
+    isReadByOwnerCourse                  boolean       not null default false,
     ownerCourseAnswerComment             varchar(1000),
     ownerCourseAnswerCommentCreationDate DATETIME,
     creationDate                         DATETIME      not null default CURRENT_TIMESTAMP,
@@ -24,8 +25,8 @@ create table NotificationReadStatus
 
 
 insert into NotificationReadStatus (id, name)
-values (1, 'Не прочитан'),
-       (2, 'Прочитан');
+values (1, 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ'),
+       (2, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 
 create table FeedbackNotification
