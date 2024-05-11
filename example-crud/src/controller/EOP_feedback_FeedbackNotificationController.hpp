@@ -1,6 +1,6 @@
 
-#ifndef FeedbackNotificationController_hpp
-#define FeedbackNotificationController_hpp
+#ifndef FEEDBACKNOTIFICATIONCONTROLLER_HPP
+#define FEEDBACKNOTIFICATIONCONTROLLER_HPP
 
 #include "service/EOP_feedback_FeedbackNotificationService.hpp"
 
@@ -92,4 +92,4 @@ public:
 
 #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 
-#endif /* FeedbackNotificationController_hpp */
+#endif /* FEEDBACKNOTIFICATIONCONTROLLER_HPP */

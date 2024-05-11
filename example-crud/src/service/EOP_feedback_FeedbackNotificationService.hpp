@@ -22,4 +22,4 @@ public:
 	oatpp::Object<StatusDto> deleteReadNotifications();
 };
 
-#endif //CRUD_USERSERVICE_HPP
+#endif //CRUD_FEEDBACKNOTIFICATIONSERVICE_HPP

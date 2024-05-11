@@ -1,6 +1,6 @@
 
- #ifndef FeedbackController_hpp
- #define FeedbackController_hpp
+ #ifndef FEEDBACKCONTROLLER_HPP
+ #define FEEDBACKCONTROLLER_HPP
 
  #include "service/EOP_feedback_FeedbackService.hpp"
 
@@ -11,7 +11,7 @@
  #include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
 
  /**
-  * User REST controller.
+  * Feedback REST controller.
   */
  class FeedbackController : public oatpp::web::server::api::ApiController {
  public:
@@ -201,7 +201,7 @@
 
 
      ENDPOINT_INFO(unbanFeedback) {
-         info->summary = "Update User by userId";
+         info->summary = "Unban feedback";
 
          info->addConsumes<Object<FeedbackDto>>("application/json");
 
@@ -236,4 +236,4 @@
 
  #include OATPP_CODEGEN_END(ApiController) //<- End Codegen
 
- #endif /* UserController_hpp */
+ #endif /* FEEDBACKCONTROLLER_HPP */

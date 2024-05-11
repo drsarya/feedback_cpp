@@ -20,29 +20,29 @@ public:
 		oatpp::orm::SchemaMigration migration(executor);
 		migration.addFile(1 /* start from version 1 */, DATABASE_MIGRATIONS "/001_init.sql");
 		// TODO - Add more migrations here.
-		migration.migrate(); // <-- run migrations. This guy will throw on error.
+		migration.migrate(); // <-- run igrations. This guy will throw on error.
 
 		auto version = executor->getSchemaVersion();
 		OATPP_LOGD("FeedbackNotificatonDb", "Migration - OK. Version=%lld.", version);
 	}
-		
-		QUERY(createNotificationFeedback,
-			"insert into  FeedbackNotification (feedbackId, userId, description) values " 
-			"(:notification.feedbackId, :notification.userId, :notification.description );",
-			PARAM(oatpp::Object<FeedbackNotificationDto>, notification))
+
+	QUERY(createNotificationFeedback,
+		"insert into  FeedbackNotification (feedbackId, userId, description) values "
+		"(:notification.feedbackId, :notification.userId, :notification.description );",
+		PARAM(oatpp::Object<FeedbackNotificationDto>, notification))
 
 
 		QUERY(getNotificationById,
 			"SELECT  *  FROM  FeedbackNotification "
 			"WHERE  id=:id;",
 			PARAM(oatpp::Int32, id))
-	 
+
 		QUERY(readNotificationFeedback,
 			"UPDATE  FeedbackNotification "
 			"SET notificationStatus = 2 "
 			"WHERE id = :id;",
 			PARAM(oatpp::Int32, id))
-		 
+
 		QUERY(getNotificationsForUserId,
 			"SELECT * FROM FeedbackNotification "
 			"WHERE  userId=:userId and notificationStatus = 1 order by creationDate desc;",
