@@ -21,10 +21,9 @@ public:
     oatpp::swagger::DocumentInfo::Builder builder;
     
     builder
-    .setTitle("User entity service")
+    .setTitle("Feedback entity service")
     .setDescription("CRUD API Example project with swagger docs")
     .setVersion("1.0")
-    .setContactName("Ivan Ovsyanochka")
     .setContactUrl("https://oatpp.io/")
     
     .setLicenseName("Apache License, Version 2.0")

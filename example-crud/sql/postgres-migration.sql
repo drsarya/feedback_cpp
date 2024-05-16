@@ -12,13 +12,14 @@ create table feedback.feedback
     show_commentator_login                    boolean                  not null,
     course_id                                 uuid                     not null,
     owner_course_user_id                      uuid                     not null,
+    is_read_by_owner_course                       boolean                  not null default false,
     owner_course_answer_comment               varchar(1000),
     owner_course_answer_comment_creation_date timestamp with time zone,
     creation_date                             timestamp with time zone not null default now(),
     update_date                               timestamp with time zone,
     is_banned                                 boolean                           default false,
-    is_banned_description                     varchar(1000),
-    is_banned_date                            timestamp with time zone
+    ban_description                           varchar(1000),
+    ban_date                                  timestamp with time zone
 );
 
 comment
@@ -46,9 +47,9 @@ on column feedback.feedback.update_date is 'Дата обновления обр
 comment
 on column feedback.feedback.is_banned is 'Заблокирован ли комментарий пользователя';
 comment
-on column feedback.feedback.is_banned_description is 'Причина блокировки комментария';
+on column feedback.feedback.ban_description is 'Причина блокировки комментария';
 comment
-on column feedback.feedback.is_banned_date is 'Дата блокировки комментария';
+on column feedback.feedback.ban_date is 'Дата блокировки комментария';
 
 
 
@@ -70,12 +71,12 @@ values (1, 'Не прочитан'),
 
 create table feedback.feedback_notification
 (
-    id            serial primary key,
-    feedback_id   integer references feedback.feedback (id)                 not null on delete cascade,
-    user_id       uuid                                                      not null,
-    description   varchar(100)                                              not null,
-    read_status   integer references feedback.notification_read_status (id) not null default 1,
-    creation_date timestamp with time zone                                  not null default now()
+    id                  serial primary key,
+    feedback_id         integer references feedback.feedback (id)                 not null on delete cascade,
+    user_id             uuid                                                      not null,
+    description         varchar(100)                                              not null,
+    notification_status integer references feedback.notification_read_status (id) not null default 1,
+    creation_date       timestamp with time zone                                  not null default now()
 );
 
 

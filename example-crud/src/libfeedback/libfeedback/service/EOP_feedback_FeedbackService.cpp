@@ -7,9 +7,9 @@
  	auto dbResult = m_database->createFeedback(dto);
  	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
 
- 	auto id = oatpp::sqlite::Utils::getLastInsertRowId(dbResult->getConnection());
-
- 	return FeedbackService::getFeedbackById((v_int32)id);
+    auto result = dbResult->fetch<oatpp::Vector<oatpp::Object<FeedbackDto>>>();
+    OATPP_ASSERT_HTTP(result->size() == 1, Status::CODE_500, "Unknown error");
+    return result[0];
 
  }
 

@@ -7,9 +7,9 @@ oatpp::Object<FeedbackNotificationDto> FeedbackNotificationService::createNotifi
 	auto dbResult = m_database->createNotificationFeedback(dto);
 	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
 
-	auto notificationId = oatpp::sqlite::Utils::getLastInsertRowId(dbResult->getConnection());
-
-	return FeedbackNotificationService::getNotificationById((v_int32)notificationId);
+	auto result = dbResult->fetch<oatpp::Vector<oatpp::Object<FeedbackNotificationDto>>>();
+	OATPP_ASSERT_HTTP(result->size() == 1, Status::CODE_500, "Unknown error");
+	return result[0];
 }
 
 
