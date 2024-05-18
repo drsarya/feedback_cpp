@@ -34,7 +34,7 @@ cd build
 
 ############################################################################
 ############################################################################
-cmake -DOATPP_DISABLE_ENV_OBJECT_COUNTERS=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOATPP_BUILD_TESTS=OFF ..
+cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOATPP_BUILD_TESTS=OFF -DOATPP_SQLITE_AMALGAMATION=ON ..
 make install -j $NPROC
 
 cd ../../
@@ -62,7 +62,7 @@ cd build
 
 ############################################################################
 ############################################################################
-cmake -DOATPP_DISABLE_ENV_OBJECT_COUNTERS=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOATPP_BUILD_TESTS=OFF ..
+cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOATPP_BUILD_TESTS=OFF -DOATPP_SQLITE_AMALGAMATION=ON ..
 make install -j $NPROC
 #
 #cd ../../
@@ -73,7 +73,7 @@ make install -j $NPROC
 
 install_module2 $BUILD_TYPE oatpp RELEASE
 install_module $BUILD_TYPE oatpp-swagger RELEASE
-install_module $BUILD_TYPE oatpp-postgresql RELEASE
+install_module $BUILD_TYPE oatpp-sqlite RELEASE
 
 cd ../
 rm -rf tmp
