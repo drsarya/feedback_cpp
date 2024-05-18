@@ -11,7 +11,8 @@ mkdir build
 cd build
 cmake -DOATPP_DISABLE_ENV_OBJECT_COUNTERS=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOATPP_BUILD_TESTS=OFF ..
 cmake --build .   --target install
-
+cd ..
+cd ..
 
 
 git clone --depth=1 https://github.com/oatpp/oatpp-swagger
@@ -20,7 +21,8 @@ mkdir build
 cd build
 cmake -DOATPP_DISABLE_ENV_OBJECT_COUNTERS=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOATPP_BUILD_TESTS=OFF ..
 cmake --build .   --target install
-
+cd ..
+cd ..
 
 
 git clone --depth=1 https://github.com/oatpp/oatpp-postgresql
