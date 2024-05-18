@@ -30,10 +30,10 @@ public:
   OATPP_CREATE_COMPONENT(std::shared_ptr<FeedbackNotificatonDb>, feedbackNotificationDb)([] {
 
       /* Get database ConnectionProvider component */
-      OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::sqlite::Connection>>, connectionProvider);
+      OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::postgresql::Connection>>, connectionProvider);
 
       /* Create database-specific Executor */
-      auto executor = std::make_shared<oatpp::sqlite::Executor>(connectionProvider);
+      auto executor = std::make_shared<oatpp::postgresql::Executor>(connectionProvider);
 
       /* Create MyClient database client */
       return std::make_shared<FeedbackNotificatonDb>(executor);
@@ -47,10 +47,10 @@ public:
    OATPP_CREATE_COMPONENT(std::shared_ptr<FeedbackDb>, feedbackDb)([] {
 
        /* Get database ConnectionProvider component */
-       OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::sqlite::Connection>>, connectionProvider);
+       OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::postgresql::Connection>>, connectionProvider);
 
        /* Create database-specific Executor */
-       auto executor = std::make_shared<oatpp::sqlite::Executor>(connectionProvider);
+       auto executor = std::make_shared<oatpp::postgresql::Executor>(connectionProvider);
 
        /* Create MyClient database client */
        return std::make_shared<FeedbackDb>(executor);
