@@ -47,13 +47,13 @@ target_include_directories(crud-lib PUBLIC src/libfeedback/libfeedback)
 
 find_package(oatpp          1.3.0 REQUIRED)
 find_package(oatpp-swagger  1.3.0 REQUIRED)
-find_package(oatpp-postgresql   1.3.0 REQUIRED)
+find_package(oatpp-sqlite   1.3.0 REQUIRED)
 
 target_link_libraries(crud-lib
         # Oat++
         PUBLIC oatpp::oatpp
         PUBLIC oatpp::oatpp-swagger
-        PUBLIC oatpp::oatpp-postgresql
+        PUBLIC oatpp::oatpp-sqlite
 )
 
 
@@ -61,6 +61,10 @@ target_link_libraries(crud-lib
 add_definitions(
         ## define path to swagger-ui static resources folder
         -DOATPP_SWAGGER_RES_PATH="${oatpp-swagger_INCLUDE_DIRS}/../bin/oatpp-swagger/res"
+
+        -DDATABASE_FILE="${CMAKE_CURRENT_SOURCE_DIR}/db.sqlite"
+        ## SQLite database test file
+        -DTESTDATABASE_FILE="${CMAKE_CURRENT_SOURCE_DIR}/test-db.sqlite"
 
         # Path to config file #
         -DCONFIG_PATH="${CMAKE_CURRENT_LIST_DIR}/resources/config.json"
@@ -78,7 +82,6 @@ endif()
 
 add_executable(crud-exe "src/libfeedback/libfeedback/App.cpp")
 target_link_libraries(crud-exe crud-lib)
-add_dependencies(${project_name}-exe ${project_name}-lib)
 
  
 

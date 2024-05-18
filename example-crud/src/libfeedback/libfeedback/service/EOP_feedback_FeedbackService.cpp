@@ -5,11 +5,11 @@
  oatpp::Object<FeedbackDto> FeedbackService::createFeedback(const oatpp::Object<FeedbackDto>& dto) {
 
  	auto dbResult = m_database->createFeedback(dto);
- 	OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
+    OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
 
-    auto result = dbResult->fetch<oatpp::Vector<oatpp::Object<FeedbackDto>>>();
-    OATPP_ASSERT_HTTP(result->size() == 1, Status::CODE_500, "Unknown error");
-    return result[0];
+    auto id = oatpp::sqlite::Utils::getLastInsertRowId(dbResult->getConnection());
+
+    return FeedbackService::getFeedbackById((v_int32)id);
 
  }
 

@@ -3,7 +3,7 @@
 #define CRUD_FeedbackNotificatonDb_HPP
 
 #include "dto/EOP_feedback_FeedbackNotificationDto.hpp"
-#include "oatpp-postgresql/orm.hpp"
+#include "oatpp-sqlite/orm.hpp"
 
 #include OATPP_CODEGEN_BEGIN(DbClient) //<- Begin Codegen
 
@@ -27,30 +27,30 @@ public:
 	}
 
 	QUERY(createNotificationFeedback,
-		"insert into  feedback.feedback_notification (feedback_id, user_id, description) values "
-		"(:notification.feedbackId, :notification.userId, :notification.description ) RETURNING *;",
+		"insert into   feedback_notification (feedback_id, user_id, description) values "
+		"(:notification.feedbackId, :notification.userId, :notification.description ) ;",
 		PARAM(oatpp::Object<FeedbackNotificationDto>, notification))
 
 
 		QUERY(getNotificationById,
 			"SELECT  id, feedback_id as feedbackId,user_id as userId, description, notification_status as notificationStatus, creation_date as creationDate"
-			" FROM  feedback.feedback_notification "
+			" FROM   feedback_notification "
 			"WHERE  id=:id;",
 			PARAM(oatpp::Int32, id))
 
 		QUERY(readNotificationFeedback,
-			"UPDATE  feedback.feedback_notification "
+			"UPDATE   feedback_notification "
 			"SET notification_status = 2 "
 			"WHERE id = :id;",
 			PARAM(oatpp::Int32, id))
 
 		QUERY(getNotificationsForUserId,
-			"SELECT id, feedback_id as feedbackId,user_id as userId, description, notification_status as notificationStatus, creation_date as creationDate  FROM feedback.feedback_notification "
+			"SELECT id, feedback_id as feedbackId,user_id as userId, description, notification_status as notificationStatus, creation_date as creationDate  FROM  feedback_notification "
 			"WHERE  user_id=:userId and notification_status = 1 order by creation_date desc;",
 			PARAM(oatpp::String, userId))
 
 		QUERY(deleteReadNotifications,
-			"delete FROM feedback.feedback_notification WHERE notification_status = 2;")
+			"delete FROM feedback_notification WHERE notification_status = 2;")
 };
 
 #include OATPP_CODEGEN_END(DbClient) //<- End Codegen

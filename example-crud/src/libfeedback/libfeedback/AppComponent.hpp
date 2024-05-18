@@ -4,7 +4,6 @@
 
 #include "SwaggerComponent.hpp"
 #include "DatabaseComponent.hpp"
-
 #include "ErrorHandler.hpp"
 
 #include "oatpp/web/server/HttpConnectionHandler.hpp"

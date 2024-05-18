@@ -11,13 +11,13 @@ public:
   /**
    * Create database connection provider component
    */
-  OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::postgresql::Connection>>, dbConnectionProvider)([] {
+  OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::sqlite::Connection>>, dbConnectionProvider)([] {
 
     /* Create database-specific ConnectionProvider */
-      auto connectionProvider = std::make_shared<oatpp::postgresql::ConnectionProvider>("postgresql://postgres:db-pass@db:5432/postgres");
+      auto connectionProvider = std::make_shared<oatpp::sqlite::ConnectionProvider>(DATABASE_FILE);
 
     /* Create database-specific ConnectionPool */
-    return oatpp::postgresql::ConnectionPool::createShared(connectionProvider,
+    return oatpp::sqlite::ConnectionPool::createShared(connectionProvider,
         10 /* max-connections */,
         std::chrono::seconds(5) /* connection TTL */);
 
