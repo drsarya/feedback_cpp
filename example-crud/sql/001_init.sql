@@ -9,6 +9,7 @@ create table feedback.feedback
     show_commentator_login                    boolean                  not null,
     course_id                                 uuid                     not null,
     owner_course_user_id                      uuid                     not null,
+    is_read_by_owner_course                       boolean              not null default false,
     owner_course_answer_comment               varchar(1000),
     owner_course_answer_comment_creation_date timestamp with time zone,
     creation_date                             timestamp with time zone not null default now(),

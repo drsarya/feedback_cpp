@@ -4,32 +4,43 @@ project(crud)
 set(CMAKE_CXX_STANDARD 11)
 
 add_library(crud-lib
-        src/controller/EOP_feedback_FeedbackController.hpp
-        src/controller/EOP_feedback_FeedbackNotificationController.hpp
-        src/controller/StaticController.hpp
+        src/libfeedback/libfeedback/controller/EOP_feedback_FeedbackController.hpp
+        src/libfeedback/libfeedback/controller/EOP_feedback_FeedbackNotificationController.hpp
+        src/libfeedback/libfeedback/controller/StaticController.hpp
         
-        src/db/EOP_feedback_FeedbackDb.hpp
-        src/db/EOP_feedback_FeedbackNotificationDb.hpp
+        src/libfeedback/libfeedback/db/EOP_feedback_FeedbackDb.hpp
+        src/libfeedback/libfeedback/db/EOP_feedback_FeedbackNotificationDb.hpp
         
-        src/dto/EOP_feedback_FeedbackDto.hpp
-        src/dto/EOP_feedback_FeedbackNotificationDto.hpp
-        src/dto/PageDto.hpp
-        src/dto/StatusDto.hpp
+        src/libfeedback/libfeedback/dto/EOP_feedback_FeedbackDto.hpp
+        src/libfeedback/libfeedback/dto/EOP_feedback_FeedbackNotificationDto.hpp
+        src/libfeedback/libfeedback/dto/PageDto.hpp
+        src/libfeedback/libfeedback/dto/StatusDto.hpp
+
+
+        src/libfeedback/libfeedback/public/feedback/EOP_feedback_FeedbackService.c
+        src/libfeedback/libfeedback/public/feedback/EOP_feedback_FeedbackService.cpp
+        src/libfeedback/libfeedback/public/feedback/EOP_feedback_FeedbackService.h
+        src/libfeedback/libfeedback/public/feedback/EOP_feedback_FeedbackService.hpp
+
+        src/libfeedback/libfeedback/public/feedback_notification/EOP_feedback_FeedbackNotificationService.c
+        src/libfeedback/libfeedback/public/feedback_notification/EOP_feedback_FeedbackNotificationService.cpp
+        src/libfeedback/libfeedback/public/feedback_notification/EOP_feedback_FeedbackNotificationService.h
+        src/libfeedback/libfeedback/public/feedback_notification/EOP_feedback_FeedbackNotificationService.hpp
         
-        src/service/EOP_feedback_FeedbackNotificationService.cpp 
-        src/service/EOP_feedback_FeedbackNotificationService.hpp
-        src/service/EOP_feedback_FeedbackService.cpp
-        src/service/EOP_feedback_FeedbackService.hpp
+        src/libfeedback/libfeedback/service/EOP_feedback_FeedbackNotificationService.cpp
+        src/libfeedback/libfeedback/service/EOP_feedback_FeedbackNotificationService.hpp
+        src/libfeedback/libfeedback/service/EOP_feedback_FeedbackService.cpp
+        src/libfeedback/libfeedback/service/EOP_feedback_FeedbackService.hpp
         
-        src/AppComponent.hpp
-        src/DatabaseComponent.hpp
-        src/SwaggerComponent.hpp
+        src/libfeedback/libfeedback/AppComponent.hpp
+        src/libfeedback/libfeedback/DatabaseComponent.hpp
+        src/libfeedback/libfeedback/SwaggerComponent.hpp
         "src/libfeedback/libfeedback/ErrorHandler.cpp"
-        src/ErrorHandler.hpp)
+        src/libfeedback/libfeedback/ErrorHandler.hpp)
 
 ## include directories
 
-target_include_directories(crud-lib PUBLIC src)
+target_include_directories(crud-lib PUBLIC src/libfeedback/libfeedback)
 
 
 ## link libs
@@ -67,6 +78,7 @@ endif()
 
 add_executable(crud-exe "src/libfeedback/libfeedback/App.cpp")
 target_link_libraries(crud-exe crud-lib)
+add_dependencies(${project_name}-exe ${project_name}-lib)
 
  
 

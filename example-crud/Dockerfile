@@ -14,7 +14,7 @@ ADD . /service
 
 WORKDIR /service/utility
 
-RUN ./install-oatpp-modules.sh
+RUN ./modules.sh
 
 WORKDIR /service/build
 

@@ -13,9 +13,8 @@ public:
    */
   OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::postgresql::Connection>>, dbConnectionProvider)([] {
 
-    OATPP_COMPONENT(oatpp::Object<ConfigDto>, config); // Get config component
     /* Create database-specific ConnectionProvider */
-    auto connectionProvider = std::make_shared<oatpp::postgresql::ConnectionProvider>(config->dbConnectionString);
+      auto connectionProvider = std::make_shared<oatpp::postgresql::ConnectionProvider>("postgresql://postgres:db-pass@db:5432/postgres");
 
     /* Create database-specific ConnectionPool */
     return oatpp::postgresql::ConnectionPool::createShared(connectionProvider,
@@ -31,10 +30,10 @@ public:
   OATPP_CREATE_COMPONENT(std::shared_ptr<FeedbackNotificatonDb>, feedbackNotificationDb)([] {
 
       /* Get database ConnectionProvider component */
-      OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::postgresql::Connection>>, connectionProvider);
+      OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::sqlite::Connection>>, connectionProvider);
 
       /* Create database-specific Executor */
-      auto executor = std::make_shared<oatpp::postgresql::Executor>(connectionProvider);
+      auto executor = std::make_shared<oatpp::sqlite::Executor>(connectionProvider);
 
       /* Create MyClient database client */
       return std::make_shared<FeedbackNotificatonDb>(executor);
@@ -48,10 +47,10 @@ public:
    OATPP_CREATE_COMPONENT(std::shared_ptr<FeedbackDb>, feedbackDb)([] {
 
        /* Get database ConnectionProvider component */
-       OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::postgresql::Connection>>, connectionProvider);
+       OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::sqlite::Connection>>, connectionProvider);
 
        /* Create database-specific Executor */
-       auto executor = std::make_shared<oatpp::postgresql::Executor>(connectionProvider);
+       auto executor = std::make_shared<oatpp::sqlite::Executor>(connectionProvider);
 
        /* Create MyClient database client */
        return std::make_shared<FeedbackDb>(executor);
