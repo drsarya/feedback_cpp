@@ -66,8 +66,6 @@ add_definitions(
         ## SQLite database test file
         -DTESTDATABASE_FILE="${CMAKE_CURRENT_SOURCE_DIR}/test-db.sqlite"
 
-        # Path to config file #
-        -DCONFIG_PATH="${CMAKE_CURRENT_LIST_DIR}/resources/config.json"
 
         ## Path to database migration scripts
        -DDATABASE_MIGRATIONS="${CMAKE_CURRENT_SOURCE_DIR}/sql"
