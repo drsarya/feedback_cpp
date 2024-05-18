@@ -1,6 +1,5 @@
-FROM lganzzzo/alpine-cmake:latest
+FROM alpine:latest
 
-RUN apk add postgresql-dev
 
 RUN apk update && apk upgrade
 
